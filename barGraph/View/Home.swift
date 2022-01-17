@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Home: View {
+    @State var totalPrice: Float = 0
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
             VStack(spacing: 15){
@@ -24,6 +25,7 @@ struct Home: View {
     }
     @ViewBuilder
     func DownloadStats()->some View {
+        
         VStack(spacing: 15){
             HStack{
                 VStack(alignment: .leading, spacing: 13){
@@ -53,7 +55,7 @@ struct Home: View {
                 .offset(y: -10)
             }
             HStack{
-                Text("$12.85")
+                Text("$\(String(format: "%.2f", totalPrice))")
                     .font(.largeTitle.bold())
                 Spacer()
                 Button{
@@ -71,7 +73,7 @@ struct Home: View {
                 }
             }
             .padding(.vertical, 20)
-            BarGraph(downloads: weekDownloads)
+            BarGraph(downloads: weekDownloads, totalPrice: $totalPrice)
                 .padding(.top, 25)
         }
         .padding(15)
